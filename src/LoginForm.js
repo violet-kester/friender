@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // iimport "./LoginForm.css";
 
 /** Login form.
@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
  */
 
 function LoginForm({ handleSave }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -44,7 +44,8 @@ function LoginForm({ handleSave }) {
     console.log("handleSubmit")
     try {
       await handleSave(formData);
-      navigate("/upload");
+      // console.log("LOGIN FORM handleSubmit");
+      // navigate("/upload");
     } catch (err) {
       setFormErrors(err);
     }
