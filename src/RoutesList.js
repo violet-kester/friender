@@ -25,19 +25,32 @@ function RoutesList({ upload, signup, login }) {
     <Routes>
       <Route
         path="/"
-        element={<Home />} />
-      <Route
-        path="/signup"
-        element={<SignupForm handleSave={signup} />} />
-      <Route
-        path="/login"
-        element={<LoginForm handleSave={login} />} />
-      <Route
-        path="/upload"
-        element={<UploadForm handleSave={upload} />} />
+        element={<Home />}
+      />
+      {!localStorage.getItem("token") &&
+        <>
+          <Route
+            path="/signup"
+            element={<SignupForm handleSave={signup} />}
+          />
+          <Route
+            path="/login"
+            element={<LoginForm handleSave={login} />}
+          />
+        </>
+      }
+      {localStorage.getItem("token") &&
+        <>
+          <Route
+            path="/upload"
+            element={<UploadForm handleSave={upload} />}
+          />
+        </>
+      }
       <Route
         path="*"
-        element={<h1>404 Page not found.</h1>} />
+        element={<h1>404 Page not found.</h1>}
+      />
     </Routes>
   );
 }
