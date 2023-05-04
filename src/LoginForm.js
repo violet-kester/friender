@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
  *
  */
 
-function LoginForm({ login }) {
+function LoginForm({ handleSave }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -43,7 +43,7 @@ function LoginForm({ login }) {
     evt.preventDefault();
     console.log("handleSubmit")
     try {
-      await login(formData);
+      await handleSave(formData);
       navigate("/upload");
     } catch (err) {
       setFormErrors(err);
