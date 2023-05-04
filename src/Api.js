@@ -46,6 +46,13 @@ class FrienderApi {
     const result = await axios.post(`${BASE_API_URL}/upload`, file);
     return "Uploaded!";
   }
+
+  /** get user info */
+  static async getUser(username) {
+    console.log("getUser called with username = ", username);
+    const result = await this.request(`users/${username}`);
+    return result.data.user;
+  }
 }
 
 
