@@ -10,13 +10,14 @@ class FrienderApi {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_API_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${FrienderApi.token}` };
+    // const headers = { Authorization: `Bearer ${FrienderApi.token}` };
     const params = (method === "get")
       ? data
       : {};
 
     try {
-      return (await axios({ url, method, data, params, headers })).data;
+      // return (await axios({ url, method, data, params, headers })).data;
+      return (await axios({ url, method, data, params })).data;
     } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.error.message;
@@ -34,7 +35,7 @@ class FrienderApi {
   /** login user */
   static async login(formData) {
     console.log("FrienderApi login", formData);
-    let res = await this.request(`auth/token`, formData, "post");
+    let res = await this.request(`login`, formData, "post");
     return res.token;
   }
 
