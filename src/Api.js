@@ -47,13 +47,21 @@ class FrienderApi {
     return "Uploaded!";
   }
 
-  /** get user info */
-  static async getUser(username) {
-    console.log("getUser called with username = ", username);
-    const result = await this.request(`users/${username}`);
+  /** get user info by id */
+  static async getUser(id) {
+    console.log("getUser called with username = ", id);
+    const result = await this.request(`users/${id}`);
     return result.data.user;
   }
+
+  /** get user info by username */
+  // static async getUser(username) {
+  //   console.log("getUser called with username = ", username);
+  //   const result = await this.request(`users/${username}`);
+  //   return result.data.user;
+  // }
 }
+
 
 
 // {

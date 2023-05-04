@@ -32,8 +32,8 @@ function App() {
     // TODO: set currentUser
     setToken(tokenFromAPI);
 
-    const username = jwt_decode(tokenFromAPI);
-    const user = await FrienderApi.getUser(username);
+    const user_id = jwt_decode(tokenFromAPI);
+    const user = await FrienderApi.getUser(user_id);
     setCurrentUser({data: user, infoLoaded: true});
     navigate("/"); // FIXME:  Why arent you navigating?
   }
