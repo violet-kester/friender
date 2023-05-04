@@ -4,7 +4,7 @@ import FrienderApi from './Api';
 import useLocalStorage from "./useLocalStorage";
 // import './App.css';
 
-export const TOKEN_STORAGE_ID = "friender-token"
+export const TOKEN_STORAGE_ID = "token"
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -21,8 +21,9 @@ function App() {
 
   async function login(formData) {
     console.log("App login")
-    let token = await FrienderApi.login(formData);
-    setToken(token);
+    let tokenAPI = await FrienderApi.login(formData);
+    console.log("tokenAPI", tokenAPI);
+    setToken(tokenAPI);
   }
 
   async function upload(image) {
