@@ -4,6 +4,7 @@ import RoutesList from './RoutesList';
 import FrienderApi from './Api';
 import useLocalStorage from "./useLocalStorage";
 import NavBar from "./NavBar";
+import jwt_decode from "jwt-decode";
 // import './App.css';
 
 export const TOKEN_STORAGE_ID = "token";
@@ -13,6 +14,7 @@ const DEFAULT_USER = {
 };
 
 function App() {
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(DEFAULT_USER);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
@@ -24,11 +26,16 @@ function App() {
 
   async function login(formData) {
     console.log("App login");
-    let tokenAPI = await FrienderApi.login(formData);
-    console.log("tokenAPI", tokenAPI);
+    const tokenFromAPI = await FrienderApi.login(formData);
+    console.log("tokenAPI", tokenFromAPI);
     // TODO: get user data - api call - useEffect
     // TODO: set currentUser
-    setToken(tokenAPI);
+    setToken(tokenFromAPI);
+
+    const username = jwt_decode(tokenFromAPI);
+    const user = await FrienderApi.getUser(username);
+    setCurrentUser({data: user, infoLoaded: true});
+    navigate("/"); // FIXME:  Why arent you navigating?
   }
 
   async function logout() {
