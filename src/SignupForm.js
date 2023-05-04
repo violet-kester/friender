@@ -4,8 +4,10 @@ import { useState } from "react";
 const DEFAULT_FORM_DATA = {
   username: "",
   password: "",
+  email: "",
   hobbies: "",
-  images: []
+  interests: "",
+  location: ""
 };
 
 /** SignupForm -------------------------------------------------------
@@ -34,15 +36,19 @@ function SignupForm({ handleSave }) {
   }
 
   /** Call parent function and clear form. */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    handleSave(formData);
-    setFormData(DEFAULT_FORM_DATA);
+    try {
+      await handleSave(formData);
+      setFormData(DEFAULT_FORM_DATA);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
     <div className="SignupForm">
-      <form className="SignupForm-form">
+      <form className="SignupForm-form" onSubmit={handleSubmit}>
 
         <div className="SignupForm-field">
           <label className="SignupFirn-label" htmlFor="username">
@@ -64,7 +70,20 @@ function SignupForm({ handleSave }) {
             name="password"
             type="password"
             className="SignupForm-input"
-            value={formData.username}
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="SignupForm-field">
+          <label className="SignupForm-label" htmlFor="email">
+            Email:
+          </label>
+          <input
+            name="email"
+            type="email"
+            className="SignupForm-input"
+            value={formData.email}
             onChange={handleChange}
           />
         </div>
@@ -76,11 +95,37 @@ function SignupForm({ handleSave }) {
           <input
             name="hobbies"
             className="SignupForm-input"
-            value={formData.username}
+            value={formData.hobbies}
             onChange={handleChange}
           />
         </div>
 
+        <div className="SignupForm-field">
+          <label className="SignupForm-label" htmlFor="interests">
+            Interests:
+          </label>
+          <input
+            name="interests"
+            className="SignupForm-input"
+            value={formData.interests}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="SignupForm-field">
+          <label className="SignupForm-label" htmlFor="location">
+            Zip code:
+          </label>
+          <input
+            name="location"
+            className="SignupForm-input"
+            value={formData.location}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <button> Signup </button>
+        </div>
 
         {/* <ImageUploader
           withIcon={true}
@@ -94,3 +139,5 @@ function SignupForm({ handleSave }) {
     </div>
   );
 }
+
+export default SignupForm;

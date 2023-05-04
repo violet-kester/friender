@@ -4,6 +4,12 @@ import FrienderApi from './Api';
 
 function App() {
 
+  async function signup(user) {
+    const newUser = await FrienderApi.signup(user);
+    console.log("newUser", newUser);
+    return newUser;
+  }
+
   async function upload(image) {
     const results = await FrienderApi.upload(image);
     console.log(results);
@@ -13,7 +19,7 @@ function App() {
   return (
     <div className="App">
       {/* <NavBar /> */}
-      <RoutesList upload={upload} />
+      <RoutesList upload={upload} signup={signup} />
     </div>
   );
 }

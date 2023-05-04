@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 // import Home from "./Home";
-// import SignupForm from "./SignupForm";
+import SignupForm from "./SignupForm";
 import UploadForm from "./UploadForm";
 
 
@@ -19,16 +19,16 @@ import UploadForm from "./UploadForm";
  *
  */
 
-function RoutesList({ upload }) {
+function RoutesList({ upload, signup }) {
 
   return (
     <Routes>
       {/* <Route
         path="/"
-        element={<Home />} />
+        element={<Home />} /> */}
       <Route
         path="/signup"
-        element={<SignupForm />} /> */}
+        element={<SignupForm handleSave={signup} />} />
       <Route
         path="/upload"
         element={<UploadForm handleSave={upload} />} />
