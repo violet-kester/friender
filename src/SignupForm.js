@@ -63,7 +63,7 @@ function SignupForm({ handleSave }) {
         </div>
 
         <div className="SignupForm-field">
-          <label className="SignupFirn-label" htmlFor="username">
+          <label className="SignupForm-label" htmlFor="username">
             Password:
           </label>
           <input

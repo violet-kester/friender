@@ -2,8 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 // import Home from "./Home";
 import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 import UploadForm from "./UploadForm";
-
 
 
 /** Site-wide routes -------------------------------------------------
@@ -19,7 +19,7 @@ import UploadForm from "./UploadForm";
  *
  */
 
-function RoutesList({ upload, signup }) {
+function RoutesList({ upload, signup, login }) {
 
   return (
     <Routes>
@@ -30,12 +30,14 @@ function RoutesList({ upload, signup }) {
         path="/signup"
         element={<SignupForm handleSave={signup} />} />
       <Route
+        path="/login"
+        element={<LoginForm handleSave={login} />} />
+      <Route
         path="/upload"
         element={<UploadForm handleSave={upload} />} />
       <Route
         path="*"
-        element={<h1>404 Page not found.</h1>
-        } />
+        element={<h1>404 Page not found.</h1>} />
     </Routes>
   );
 }
