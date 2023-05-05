@@ -18,6 +18,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState(DEFAULT_USER);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
 
+  console.log("APP.JS currentUser = ", currentUser);
+  console.log("APP.JS token = ", token);
+
   async function signup(user) {
     const newUser = await FrienderApi.signup(user);
     console.log("newUser", newUser);
@@ -27,15 +30,12 @@ function App() {
   async function login(formData) {
     console.log("App login");
     const tokenFromAPI = await FrienderApi.login(formData);
-    console.log("tokenAPI", tokenFromAPI);
-    // TODO: get user data - api call - useEffect
-    // TODO: set currentUser
-    setToken(tokenFromAPI);
+    setToken(curr => tokenFromAPI);
 
-    const user_id = jwt_decode(tokenFromAPI);
-    const user = await FrienderApi.getUser(user_id);
+    const {sub: userId} = jwt_decode(tokenFromAPI);
+    const user = await FrienderApi.getUser(userId);
     setCurrentUser({data: user, infoLoaded: true});
-    navigate("/"); // FIXME:  Why arent you navigating?
+    navigate("/");
   }
 
   async function logout() {
@@ -45,7 +45,7 @@ function App() {
   }
 
   async function upload(image) {
-    const results = await FrienderApi.upload(image);
+    const results = await FrienderApi.upload(image, currentUser.data.id);
     console.log(results);
     return results;
   }
