@@ -66,6 +66,7 @@ function App() {
           signup={signup}
           login={login}
           getImagesById={getImagesById}
+          currentUser={currentUser}
         />
       </userContext.Provider>
     </div >

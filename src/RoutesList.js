@@ -1,4 +1,5 @@
-import React from "react";
+// import { useContext } from "react";
+// import userContext from "./userContext";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import SignupForm from "./SignupForm";
@@ -20,7 +21,10 @@ import Profile from "./Profile";
  *
  */
 
-function RoutesList({ upload, signup, login, getImagesById }) {
+function RoutesList({ upload, signup, login, getImagesById, currentUser }) {
+
+  // const { currentUser } = useContext(userContext);
+  console.log("currentUser from RoutesList", currentUser)
 
   return (
     <Routes>
@@ -48,7 +52,7 @@ function RoutesList({ upload, signup, login, getImagesById }) {
           />
           <Route
             path="/profile"
-            element={<Profile getImagesById={getImagesById} />}
+            element={<Profile getImagesById={getImagesById} user={currentUser} />}
           />
         </>
       }

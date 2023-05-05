@@ -1,16 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import userContext from "./userContext";
 import FrienderApi from "./Api";
+import "./Profile.css"
 
-function Profile({ getImagesById }) {
+function Profile({ getImagesById, user }) {
   const [images, setImages] = useState([]);
 
-  const { user } = useContext(userContext);
-
-  console.log("USER FROM CONTEXT", user);
+  // const { current_user } = useContext(userContext);
 
   const userId = user.data.id;
-  console.log("PROFILE.js userId", userId);
+  console.log("userId in profile", userId);
 
   useEffect(function getImagesOnMount() {
     async function getImages(id) {
@@ -25,14 +24,20 @@ function Profile({ getImagesById }) {
   if (images.length === 0) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="Profile">
       {images.length >= 1 &&
         images.map(image =>
-          <img src={image} alt="pic"/>
+          <img src={image} alt="pic" />
         )
       }
+      <div className="Profile-details">
+        <h1 className="Profile-username">{user.data.username}</h1>
+        <p><b>Hobbies:</b> {user.data.hobbies}</p>
+        <p><b>Interests:</b> {user.data.interests}</p>
+        <p><b>Location:</b> {user.data.location}</p>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Profile;
