@@ -58,6 +58,12 @@ function App() {
     return results;
   }
 
+  async function getUnratedById(id) {
+    const results = await FrienderApi.getUnratedUsersById(id);
+    console.log("APP.py getUnratedById results", results);
+    return results;
+  }
+
   return (
     <div className="App">
       <userContext.Provider value={{user: currentUser}}>
@@ -67,7 +73,8 @@ function App() {
           signup={signup}
           login={login}
           getImagesById={getImagesById}
-          currentUser={currentUser}
+          getUnratedById={getUnratedById}
+          currentUser={currentUser.data}
         />
       </userContext.Provider>
     </div >
