@@ -8,8 +8,8 @@ function Profile({ getImagesById, user }) {
 
   // const { current_user } = useContext(userContext);
 
-  const userId = user.data.id;
-  console.log("userId in profile", userId);
+  // const userId = user.data.id;
+  // console.log("userId in profile", userId);
 
   useEffect(function getImagesOnMount() {
     async function getImages(id) {
@@ -18,7 +18,9 @@ function Profile({ getImagesById, user }) {
       setImages(imageUrls);
       return imageUrls;
     }
-    getImages(userId);
+    if(user.data){
+      getImages(user.data.id);
+    }
   }, []);
 
   if (images.length === 0) return <p>Loading...</p>;

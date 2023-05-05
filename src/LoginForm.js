@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-// iimport "./LoginForm.css";
+// import "./LoginForm.css";
 
 /** Login form.
  *
@@ -45,7 +45,6 @@ function LoginForm({ handleSave }) {
     try {
       await handleSave(formData);
       // console.log("LOGIN FORM handleSubmit");
-      // navigate("/upload");
     } catch (err) {
       setFormErrors(err);
     }

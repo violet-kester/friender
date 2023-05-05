@@ -40,15 +40,16 @@ function App() {
   }
 
   async function logout() {
-    setToken(null);
+    <Navigate to="/" />;
     setCurrentUser(DEFAULT_USER)
-    return <Navigate to="/" />;
+    setToken(null);
   }
 
   async function upload(image) {
     const results = await FrienderApi.upload(image, currentUser.data.id);
     console.log(results);
     navigate("/upload");
+    return true;
   }
 
   async function getImagesById(id) {

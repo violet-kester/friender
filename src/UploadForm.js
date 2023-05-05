@@ -33,13 +33,16 @@ function UploadForm({ handleSave }) {
   /** Call parent function and clear form. */
   async function handleSubmit(evt) {
     // console.log("evt.target from handleSubmit=", evt.target)
-
-    const imgFormData = new FormData();
     evt.preventDefault();
 
+    const imgFormData = new FormData();
     imgFormData.append("file", formData);
 
-    await handleSave(imgFormData);
+    const res = await handleSave(imgFormData);
+    console.log("I GOT HERE")
+    if (res === true) {
+      setFormData({});
+    }
   }
 
   return (
