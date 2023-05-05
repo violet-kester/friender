@@ -36,22 +36,24 @@ class FrienderApi {
   static async login(formData) {
     console.log("FrienderApi login", formData);
     let res = await this.request(`login`, formData, "post");
+    console.log("API.js res.token = ", res.token);
     return res.token;
   }
 
 
   /** upload a picture */
-  static async upload(file) {
+  static async upload(file, id) {
     console.log("FrienderApi upload", file);
-    const result = await axios.post(`${BASE_API_URL}/upload`, file);
+    let res = await this.request(`users/${id}/images`, file, "post");
     return "Uploaded!";
   }
 
   /** get user info by id */
   static async getUser(id) {
     console.log("getUser called with username = ", id);
-    const result = await this.request(`users/${id}`);
-    return result.data.user;
+    const res = await this.request(`users/${id}`);
+    console.log("getUser res = ",res);
+    return res.user;
   }
 
   /** get user info by username */
