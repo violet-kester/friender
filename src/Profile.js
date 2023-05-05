@@ -26,8 +26,8 @@ function Profile({ getImagesById, user }) {
   return (
     <div className="Profile">
       {images.length >= 1 &&
-        images.map(image =>
-          <img src={image} alt="pic" />
+        images.map((image, idx) =>
+          <img src={image} alt="pic" key={idx} />
         )
       }
       <div className="Profile-details">

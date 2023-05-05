@@ -15,7 +15,7 @@ import { Link, NavLink } from "react-router-dom";
  *
  */
 
-function NavBar({ logout }) {
+function NavBar({ user, logout }) {
 
   return (
     <nav className="NavBar">
@@ -26,7 +26,7 @@ function NavBar({ logout }) {
       </div>
       <div className="NavBar-links">
 
-        {!localStorage.getItem("token") &&
+        {!user &&
           <div className="NavBar-unprotected">
 
             <NavLink to="/login">
@@ -39,7 +39,7 @@ function NavBar({ logout }) {
           </div>
         }
 
-        {localStorage.getItem("token") &&
+        {user &&
           <div className="NavBar-protected">
 
             <NavLink to="/upload">

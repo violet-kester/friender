@@ -41,14 +41,14 @@ function App() {
 
   async function logout() {
     setToken(null);
-    // setCurrentUser(DEFAULT_USER)
+    setCurrentUser(DEFAULT_USER)
     return <Navigate to="/" />;
   }
 
   async function upload(image) {
     const results = await FrienderApi.upload(image, currentUser.data.id);
     console.log(results);
-    return results;
+    navigate("/upload");
   }
 
   async function getImagesById(id) {
@@ -60,7 +60,7 @@ function App() {
   return (
     <div className="App">
       <userContext.Provider value={{user: currentUser}}>
-        <NavBar logout={logout} />
+        <NavBar user={currentUser.data} logout={logout} />
         <RoutesList
           upload={upload}
           signup={signup}
