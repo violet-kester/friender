@@ -52,17 +52,25 @@ class FrienderApi {
   static async getUser(id) {
     console.log("getUser called with username = ", id);
     const res = await this.request(`users/${id}`);
-    console.log("getUser res = ",res);
+    console.log("getUser res = ", res);
     return res.user;
   }
 
-    /** get user images by id */
-    static async getImagesById(id) {
-      console.log("FrienderAPI getImagesById", id);
-      const res = await this.request(`users/${id}/images`);
-      console.log("FrienderAPI getImagesById res = ",res);
-      return res.images;
-    }
+  /** get user images by id */
+  static async getImagesById(id) {
+    console.log("FrienderAPI getImagesById", id);
+    const res = await this.request(`users/${id}/images`);
+    console.log("FrienderAPI getImagesById res = ", res);
+    return res.images;
+  }
+
+  /** get unrated users images by user id */
+  static async getUnratedUsersById(id) {
+    console.log("FrienderAPI getUnratedUsersById", id);
+    const res = await this.request(`users/${id}/unrated`);
+    console.log("FrienderAPI getUnratedUsersById res = ", res);
+    return res;
+  }
 
   /** get user info by username */
   // static async getUser(username) {
