@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import userContext from "./userContext";
 import FrienderApi from "./Api";
-import "./Profile.css"
+import "./Profile.css";
 
 function Profile({ getImagesById, user }) {
   const [images, setImages] = useState([]);
@@ -13,17 +14,19 @@ function Profile({ getImagesById, user }) {
 
   useEffect(function getImagesOnMount() {
     async function getImages(id) {
-      const imageUrls = await FrienderApi.getImagesById(id);
+      const imageUrls = await getImagesById(id);
+      // const imageUrls = await FrienderApi.getImagesById(id);
       console.log("PROFILE.js urls from api", imageUrls);
       setImages(imageUrls);
       return imageUrls;
     }
-    if(user.data){
-      getImages(user.data.id);
+    if (user) {
+      getImages(user.id);
     }
   }, []);
 
-  if (images.length === 0) return <p>Loading...</p>;
+  if (user === null) return <Navigate to="/" />;
+  // if (images.length === 0) return <p>Loading...</p>;
 
   return (
     <div className="Profile">
@@ -33,10 +36,10 @@ function Profile({ getImagesById, user }) {
         )
       }
       <div className="Profile-details">
-        <h1 className="Profile-username">{user.data.username}</h1>
-        <p><b>Hobbies:</b> {user.data.hobbies}</p>
-        <p><b>Interests:</b> {user.data.interests}</p>
-        <p><b>Location:</b> {user.data.location}</p>
+        <h1 className="Profile-username">{user.username}</h1>
+        <p><b>Hobbies:</b> {user.hobbies}</p>
+        <p><b>Interests:</b> {user.interests}</p>
+        <p><b>Location:</b> {user.location}</p>
       </div>
     </div>
   );

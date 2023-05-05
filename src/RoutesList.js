@@ -6,6 +6,7 @@ import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import UploadForm from "./UploadForm";
 import Profile from "./Profile";
+import FindFriend from "./FindFriend.js";
 
 
 /** Site-wide routes -------------------------------------------------
@@ -21,10 +22,16 @@ import Profile from "./Profile";
  *
  */
 
-function RoutesList({ upload, signup, login, getImagesById, currentUser }) {
+function RoutesList({
+  upload,
+  signup,
+  login,
+  getImagesById,
+  getUnratedById,
+  currentUser }) {
 
   // const { currentUser } = useContext(userContext);
-  console.log("currentUser from RoutesList", currentUser)
+  console.log("currentUser from RoutesList", currentUser);
 
   return (
     <Routes>
@@ -46,6 +53,13 @@ function RoutesList({ upload, signup, login, getImagesById, currentUser }) {
       }
       {localStorage.getItem("token") &&
         <>
+          <Route
+            path="/findfriend"
+            element={<FindFriend
+              getImagesById={getImagesById}
+              getUnratedById={getUnratedById}
+              user={currentUser} />}
+          />
           <Route
             path="/upload"
             element={<UploadForm handleSave={upload} />}

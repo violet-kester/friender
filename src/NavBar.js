@@ -42,6 +42,10 @@ function NavBar({ user, logout }) {
         {user &&
           <div className="NavBar-protected">
 
+            <NavLink to="/findfriend">
+              Find Friends
+            </NavLink>
+
             <NavLink to="/upload">
               Upload
             </NavLink>
