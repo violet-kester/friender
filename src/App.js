@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import RoutesList from './RoutesList';
 import FrienderApi from './Api';
+import userContext from "./userContext";
 import useLocalStorage from "./useLocalStorage";
 import NavBar from "./NavBar";
 import jwt_decode from "jwt-decode";
@@ -32,9 +33,9 @@ function App() {
     const tokenFromAPI = await FrienderApi.login(formData);
     setToken(curr => tokenFromAPI);
 
-    const {sub: userId} = jwt_decode(tokenFromAPI);
+    const { sub: userId } = jwt_decode(tokenFromAPI);
     const user = await FrienderApi.getUser(userId);
-    setCurrentUser({data: user, infoLoaded: true});
+    setCurrentUser({ data: user, infoLoaded: true });
     navigate("/");
   }
 
@@ -50,15 +51,24 @@ function App() {
     return results;
   }
 
+  async function getImagesById(id) {
+    const results = await FrienderApi.getImagesById(id);
+    console.log("APP.py getImagesById results", results);
+    return results;
+  }
+
   return (
     <div className="App">
-      <NavBar logout={logout} />
-      <RoutesList
-        upload={upload}
-        signup={signup}
-        login={login}
-      />
-    </div>
+      <userContext.Provider value={{user: currentUser}}>
+        <NavBar logout={logout} />
+        <RoutesList
+          upload={upload}
+          signup={signup}
+          login={login}
+          getImagesById={getImagesById}
+        />
+      </userContext.Provider>
+    </div >
   );
 }
 

@@ -56,6 +56,14 @@ class FrienderApi {
     return res.user;
   }
 
+    /** get user images by id */
+    static async getImagesById(id) {
+      console.log("FrienderAPI getImagesById", id);
+      const res = await this.request(`users/${id}/images`);
+      console.log("FrienderAPI getImagesById res = ",res);
+      return res.images;
+    }
+
   /** get user info by username */
   // static async getUser(username) {
   //   console.log("getUser called with username = ", username);

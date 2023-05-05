@@ -46,9 +46,9 @@ function NavBar({ logout }) {
               Upload
             </NavLink>
 
-            {/* <NavLink to="/profile">
+            <NavLink to="/profile">
               Profile
-            </NavLink> */}
+            </NavLink>
 
             <NavLink onClick={logout}>Logout</NavLink>
 

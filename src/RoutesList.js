@@ -4,6 +4,7 @@ import Home from "./Home";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import UploadForm from "./UploadForm";
+import Profile from "./Profile";
 
 
 /** Site-wide routes -------------------------------------------------
@@ -19,7 +20,7 @@ import UploadForm from "./UploadForm";
  *
  */
 
-function RoutesList({ upload, signup, login }) {
+function RoutesList({ upload, signup, login, getImagesById }) {
 
   return (
     <Routes>
@@ -44,6 +45,10 @@ function RoutesList({ upload, signup, login }) {
           <Route
             path="/upload"
             element={<UploadForm handleSave={upload} />}
+          />
+          <Route
+            path="/profile"
+            element={<Profile getImagesById={getImagesById} />}
           />
         </>
       }
